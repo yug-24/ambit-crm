@@ -105,12 +105,12 @@ export default function Contact() {
                   className="space-y-5"
                 >
                   <div className="grid sm:grid-cols-2 gap-5">
-                    <Field label="Full name" name="name" placeholder="Riya Shah" required />
-                    <Field label="Work email" name="email" type="email" placeholder="riya@company.com" required />
+                    <Field label="Full name" name="name" placeholder="Yug Bhatt" required />
+                    <Field label="Work email" name="email" type="email" placeholder="yug@xyz.com" required />
                   </div>
                   <div className="grid sm:grid-cols-2 gap-5">
-                    <Field label="Company" name="company" placeholder="Company name" required />
-                    <Field label="Phone" name="phone" type="tel" placeholder="+91 90000 00000" />
+                    <Field label="Company" name="company" placeholder="INSTA BIZ WEB" required />
+                    <Field label="Phone" name="phone" type="tel" placeholder="+91 123456789" />
                   </div>
 
                   <div>
