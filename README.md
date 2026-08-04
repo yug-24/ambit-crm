@@ -7,7 +7,7 @@
 [![GSAP](https://img.shields.io/badge/GSAP-Animation-88ce02?style=flat-square)](https://gsap.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-Component_State-0055ff?style=flat-square)](https://framer.com/motion)
 
-[**Live Demo**](https://your-vercel-deployment.app) • [**Loom Video Walkthrough**](https://loom.com/share/your-video-id)
+[**Live Demo**](https://ambit-crm.vercel.app/) • [**Loom Video Walkthrough**](https://www.loom.com/share/da50c49e6bdf4295b67255d0154b71e8)
 
 ---
 
