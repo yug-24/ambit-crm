@@ -21,8 +21,50 @@ export default function Nav() {
   });
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (typeof document === "undefined") return;
+
+    const root = document.documentElement;
+    const body = document.body;
+    const prevRootOverflow = root.style.overflow;
+    const prevBodyOverflow = body.style.overflow;
+    const prevBodyTouchAction = body.style.touchAction;
+
+    if (open) {
+      root.style.overflow = "hidden";
+      body.style.overflow = "hidden";
+      body.style.touchAction = "none";
+    } else {
+      root.style.overflow = "";
+      body.style.overflow = "";
+      body.style.touchAction = "";
+    }
+
+    return () => {
+      root.style.overflow = prevRootOverflow;
+      body.style.overflow = prevBodyOverflow;
+      body.style.touchAction = prevBodyTouchAction;
+    };
   }, [open]);
+
+  const handleNavClick = (href: string) => {
+    setOpen(false);
+
+    if (typeof window === "undefined") return;
+
+    const targetId = href.replace("#", "");
+    const target = document.getElementById(targetId);
+
+    if (!target) {
+      window.location.assign(href);
+      return;
+    }
+
+    window.requestAnimationFrame(() => {
+      const offset = 88;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    });
+  };
 
   return (
     <>
@@ -49,6 +91,10 @@ export default function Nav() {
               <a
                 key={l.href}
                 href={l.href}
+                onClick={(event) => {
+                  event.preventDefault();
+                  handleNavClick(l.href);
+                }}
                 className="text-sm text-slate hover:text-paper transition-colors relative group"
               >
                 {l.label}
@@ -60,6 +106,10 @@ export default function Nav() {
           <div className="hidden md:flex items-center gap-4">
             <a
               href="#contact"
+              onClick={(event) => {
+                event.preventDefault();
+                handleNavClick("#contact");
+              }}
               className="mono-label text-xs px-5 py-2.5 rounded-full bg-paper text-ink font-medium hover:bg-lime transition-colors duration-300"
             >
               Get a demo
@@ -95,7 +145,10 @@ export default function Nav() {
                 <motion.a
                   key={l.href}
                   href={l.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    handleNavClick(l.href);
+                  }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + i * 0.07 }}
@@ -106,7 +159,10 @@ export default function Nav() {
               ))}
               <motion.a
                 href="#contact"
-                onClick={() => setOpen(false)}
+                onClick={(event) => {
+                  event.preventDefault();
+                  handleNavClick("#contact");
+                }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.45 }}
